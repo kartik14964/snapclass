@@ -129,7 +129,7 @@ def student_screen():
                 if detected:
                     student_id = list(detected.keys())[0]
                     all_students = get_all_students()
-                    student = next((s for s in all_students if s['student_id']==student_id), None)
+                    student = next((s for s in all_students if s['student_id'] == student_id), None)
 
                     if student:
                         st.session_state.is_logged_in = True
@@ -138,6 +138,9 @@ def student_screen():
                         st.toast(f"Welcome Back {student['name']}")
                         time.sleep(1)
                         st.rerun()
+                    else:
+                        st.info('Database record missing! Please register as a new student.')
+                        show_registration = True
                 else:
                     st.info('Face not recognized! You might be a new student!')
                     show_registration = True
